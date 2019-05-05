@@ -1,22 +1,21 @@
-#include <fstream>
 #include <iostream>
-#include <vector>
-#include <sstream>
 #include "Graph.h"
+
 using namespace std;
 
 int main(int argc, char **argv) {
   if (argc != 3) {
-    cout << "Usage: " << argv[0] << " <GraphFilename> <QueryFilename>" << endl;
+    cout << "Usage: " << argv[0] << " <GraphFilename> <Starting_Vertex>" << endl;
     return 0;
   }
 
   const string graph_filename(argv[1]);
-  const string query_filename(argv[2]);
+  const int start_v(stoi(argv[2]));
 
-  // int N;
   Graph my_graph;
   my_graph.fillGraph(graph_filename);
   my_graph.printGraph();
-  my_graph.Query(query_filename);
+  my_graph.dijkstra(start_v);
+  Vertex* v = my_graph.getVertex(7);
+  my_graph.printPath(v);
 }

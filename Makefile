@@ -9,8 +9,11 @@ C++FLAG = -g -std=c++11 -Wall
 
 
 PROGRAM_0=
-all:
-	g++ CreateGraphAndTest.cc -o creategraphandtest
+creategraphandtest:
+	g++ CreateGraphAndTest.cc -o CreateGraphAndTest -g
+
+findpaths:
+	g++ FindPaths.cc -o FindPaths -g
 
 clean:
-	rm -rf *.o; rm -rf creategraphandtest
+	rm -rf *.o; rm -rf CreateGraphAndTest; rm -rf FindPaths;

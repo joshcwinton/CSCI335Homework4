@@ -2,31 +2,46 @@
 #define VERTEX_H
 
 #include <vector>
+
 using namespace std;
 
-class ConnectedVertex {
-public:
-  ConnectedVertex(int connected_vert, double connected_weight){
-    connected_vert_ = connected_vert;
-    connected_weight_ = connected_weight;
-  }
-private:
-  int connected_vert_;
-  double connected_weight_;
+struct Connection {
+  int vertex_num;
+  double weight;
 };
 
 class Vertex {
 public:
+  int vertex_num_;
+  bool known;
+  int dist;
+  Vertex* path = nullptr;
+  vector<Connection> adjacencies_;
+
   Vertex(int vertex_num){
-    vertex_num_=vertex_num;
+    vertex_num_ = vertex_num;
   }
 
-  bool AddConnected(int vertex_num){
-    // array_.push_back(new_vert);
-    return true;
+  void printAdjacencies(){
+    std::cout << vertex_num_ << ":  ";
+    for (size_t i = 0; i < adjacencies_.size(); i++) {
+      std::cout << "vertex_num:" << adjacencies_[i].vertex_num << ", weight: " << adjacencies_[i].weight << "; ";
+    }
+    std::cout << '\n';
   }
-private:
-  int vertex_num_;
-  std::vector<ConnectedVertex> array_;
+
+  void addAdjacency(Connection new_adjacency){
+    adjacencies_.push_back(new_adjacency);
+  }
+
+  double findAdjacency(int adj){
+    for (size_t i = 0; i < adjacencies_.size(); i++) {
+      if(adjacencies_[i].vertex_num == adj){
+        return adjacencies_[i].weight;
+      }
+    }
+    return 0;
+  }
 };
+
 #endif // VERTEX_H
