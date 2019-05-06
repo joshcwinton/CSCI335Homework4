@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include "Graph.h"
 
@@ -15,7 +17,7 @@ int main(int argc, char **argv) {
   Graph my_graph;
   my_graph.fillGraph(graph_filename);
   my_graph.printGraph();
-  my_graph.dijkstra(start_v);
-  Vertex* v = my_graph.getVertex(7);
-  my_graph.printPath(v);
+  my_graph.dijkstra(start_v); // Works
+  // Vertex* v = my_graph.getVertex(7);
+  // my_graph.printPath(v); // Doesn't Work
 }

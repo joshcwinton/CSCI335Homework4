@@ -1,3 +1,7 @@
+// JOSH WINTON
+// CSCI 335 ASSIGNMENT 4
+// MAIN FILE FOR PART 1
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -14,7 +18,6 @@ int main(int argc, char **argv) {
   const string graph_filename(argv[1]);
   const string query_filename(argv[2]);
 
-  // int N;
   Graph my_graph;
   my_graph.fillGraph(graph_filename);
   my_graph.printGraph();

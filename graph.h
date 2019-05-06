@@ -1,3 +1,6 @@
+// JOSH WINTON
+// GRAPH CLASS FOR USE IN CSCI 335 ASSIGNMENT 4
+
 #ifndef GRAPH_H
 #define GRAPH_H
 
@@ -9,6 +12,7 @@
 
 using namespace std;
 
+// helper function for parsing input
 vector<string> split (const string &s, char delim) {
     vector<string> result;
     stringstream ss (s);
@@ -21,20 +25,25 @@ vector<string> split (const string &s, char delim) {
     return result;
 }
 
+// data structure for representing graph, includes algorithms
 class Graph {
 public:
+  // single parameter constructor
   Graph(int size) { size_ = size; }
 
+  // zero parameter constructor
   Graph(){
     size_ = 0;
   }
 
+  // prints graph
   void printGraph() {
     for (size_t i = 0; i < vertices_.size(); i++) {
       vertices_[i].printAdjacencies();
     }
   }
 
+  // helper fnction for filling in graph
   void addConnections(string &db_line) {
     vector<string> split_line = split(db_line, ' ');
     int current_vertex_num = stoi(split_line[0]);
@@ -47,6 +56,7 @@ public:
     size_++;
   }
 
+  // given a file with adjacency list, fill graph
   void fillGraph(string graph_filename){
     string db_line;
     ifstream db_file(graph_filename);
@@ -58,6 +68,7 @@ public:
     }
   }
 
+  // given two vertices check if they're connected, print weight if they are
   void printConnection(int a, int b){
     Vertex current_vertex = vertices_[a-1];
     double val = current_vertex.findAdjacency(b);
@@ -68,6 +79,7 @@ public:
     }
   }
 
+  // deals with query file
   void Query(string query_filename) {
     string db_line;
     ifstream db_file(query_filename);
@@ -83,10 +95,12 @@ public:
     return size_;
   }
 
+  // given vertex number gets pointer to it
   Vertex* getVertex(int n){
     return &vertices_[n-1];
   }
 
+  // [dijkstra] Checks whether there are unknowns left in the graph
   bool has_unknown(){
     for (size_t i = 0; i < vertices_.size(); i++) {
       if(vertices_[i].known == false){
@@ -96,6 +110,7 @@ public:
     return false;
   }
 
+  // finds and returns a pointer to smallest unknown
   Vertex* findSmallestUnknown(){
     int min = 0;
     int min_dist = 100000000;
@@ -108,6 +123,7 @@ public:
     return &vertices_[min];
   }
 
+  // djikstras algorithm
   void dijkstra(int start){
     Vertex* current_vertex = getVertex(start);
 
@@ -144,6 +160,7 @@ public:
     cout << vertices_[1].path->vertex_num_;
   }
 
+  // [NOT WORKING] prints a path to vertex v from start vertex
   void printPath(Vertex* v){
     cout << "yes!" << endl;
     if(v->path != nullptr){
